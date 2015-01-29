@@ -14,8 +14,8 @@ class parameters:
  
     def __init__(self):
         self.times = 0.1        #Twist cmd_vel means [times*meter] per sec
-        self.scale_from = 0.0045  #receive info(0-1000) to  rad per sec 
-        self.scale_to = 800.00 #meter per sec to operate command(0-1000)
+        self.scale_from = 0.005556*2  #receive info(0-1000) to  rad per sec 
+        self.scale_to = 940.00  #meter per sec to operate command(0-1000)
         self.pi = 3.1415926535 
         
         self.r = 0.08           #wheel radius (meters)
@@ -23,5 +23,5 @@ class parameters:
         self.lx = 0.25          #semi-dist between wheels in the row(meters)
         self.ly = 0.26          #semi-dist between wheels in the col(meters)
 
-        self.send_vel_rate = 10
+        self.send_vel_rate = 3
         self.send_odom_rate = 1

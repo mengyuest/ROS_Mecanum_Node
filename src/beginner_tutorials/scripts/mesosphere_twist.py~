@@ -14,11 +14,10 @@ def callback(data):
    size = 1000
     
    try: 
-	   #client.send("EnableSystem")
       client.send("SetRobotSpeed Vx " + str(data.linear.x * size))
       client.send("SetRobotSpeed Vy "+ str(data.linear.y * size))
       client.send("SetRobotSpeed Omega "+ str(data.angular.z * size))
-	#rosinfo to the console
+	  #rosinfo to the console
       rospy.loginfo(rospy.get_caller_id()+"Set Vx:%d Vy:%d Wz:%d" ,int(data.linear.x*size),int(data.linear.y*size),int(data.angular.z*size))
    except:
       print("try1")

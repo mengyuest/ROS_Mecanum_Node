@@ -30,12 +30,14 @@ def mesosphere_odom():
         try:
             current_time = rospy.get_time()
             dt = (current_time - last_time)
+            last_time = current_time
     #       get speed and counts of four wheels and cal  x,y,z=0,th and Vx, Vy, Wz
             n1 = int(client.send("GetEncoderChange 1"))
             n2 = int(client.send("GetEncoderChange 2"))
             n3 = int(client.send("GetEncoderChange 3"))
             n4 = int(client.send("GetEncoderChange 4"))
             
+            print("%d %d %d %d"%(n1,n2,n3,n4))
             w1 = 2 * para.pi * n1 / dt * para.scale_from
             w2 = 2 * para.pi * n2 / dt * para.scale_from
             w3 = 2 * para.pi * n3 / dt * para.scale_from
@@ -83,7 +85,6 @@ def mesosphere_odom():
             rospy.loginfo(theStr)
             pub.publish(theOdom)
 
-            last_time = current_time
             rate.sleep()
 	except:
 		rospy.loginfo("strange!!! continue~")		
