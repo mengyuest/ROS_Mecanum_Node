@@ -49,7 +49,7 @@ def mesosphere_odom():
          
             x = x + Vx * dt
             y = y + Vy * dt
-            th = th + Wz * dt        
+            th = (th + Wz * dt) % (para.pi*2)        
 
             # broadcast the transform matrix message
             odom_quat =  quaternion_from_euler(-1,0,th)
