@@ -47,15 +47,15 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * uncomment the generate_messages entry below
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
-# Generate messages in the 'msg' folder
- add_message_files(
-   FILES
- )
+## Generate messages in the 'msg' folder
+# add_message_files(
+#   FILES
+# )
 
 ## Generate services in the 'srv' folder
- add_service_files(
-   FILES
- )
+# add_service_files(
+#   FILES
+# )
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -105,9 +105,9 @@ include_directories(
 
 ## Declare a cpp executable
 # add_executable(beginner_tutorials_node src/beginner_tutorials_node.cpp)
-add_executable(commander src/commander.cpp)
-target_link_libraries(commander ${catkin_LIBRARIES})
-add_dependencies(commander beginner_tutorials_generate_messages_cpp)
+#add_executable(commander src/commander.cpp)
+#target_link_libraries(commander ${catkin_LIBRARIES})
+#add_dependencies(commander beginner_tutorials_generate_messages_cpp)
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
 # add_dependencies(beginner_tutorials_node beginner_tutorials_generate_messages_cpp)

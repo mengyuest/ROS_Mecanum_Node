@@ -52,7 +52,7 @@ def mesosphere_odom():
             th = (th + Wz * dt) % (para.pi*2)        
 
             # broadcast the transform matrix message
-            odom_quat =  quaternion_from_euler(-1,0,th)
+            odom_quat =  quaternion_from_euler(0,0,th)
             
             odom_trans = geometry_msgs.msg.TransformStamped()
             odom_trans.header.stamp = current_time

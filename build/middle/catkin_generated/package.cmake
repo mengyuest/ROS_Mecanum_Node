@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "middle")
+set(middle_MAINTAINER "meng <meng@todo.todo>")
+set(middle_DEPRECATED "")
+set(middle_VERSION "0.0.0")
+set(middle_BUILD_DEPENDS "roscpp" "rospy" "std_msgs" "tf" "message_generation")
+set(middle_RUN_DEPENDS "message_runtime" "roscpp" "rospy" "std_msgs" "tf")
+set(middle_BUILDTOOL_DEPENDS "catkin")

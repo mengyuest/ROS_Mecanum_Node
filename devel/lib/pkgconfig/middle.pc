@@ -1,0 +1,8 @@
+prefix=/home/meng/catkin_ws/devel
+
+Name: middle
+Description: Description of middle
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/meng/catkin_ws/devel/lib 
+Requires: message_runtime
