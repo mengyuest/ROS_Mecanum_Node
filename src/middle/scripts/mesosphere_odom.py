@@ -69,6 +69,7 @@ def mesosphere_odom():
         #       next publish the odometry message over ROS                
             theOdom = Odometry()
             theOdom.header.stamp = current_time
+            print(theOdom.header)
             theOdom.header.frame_id = "odom"
             theOdom.pose.pose.position.x = x
             theOdom.pose.pose.position.y = y
