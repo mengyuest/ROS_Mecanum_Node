@@ -11,6 +11,10 @@ class parameters:
 
     send_vel_rate = 0
     send_odom_rate = 0
+
+    proportion = 0
+    integral = 0
+    derivative = 0
  
     def __init__(self):
         self.times = 0.1        #Twist cmd_vel means [times*meter] per sec
@@ -23,5 +27,9 @@ class parameters:
         self.lx = 0.25          #semi-dist between wheels in the row(meters)
         self.ly = 0.26          #semi-dist between wheels in the col(meters)
 
-        self.send_vel_rate = 2
-        self.send_odom_rate = 2
+        self.send_vel_rate = 2  #frequency about send vel to base
+        self.send_odom_rate = 2 #frequency about send msg to odom topic
+
+        self.proportion = 0.8        #pid parameters ->p
+        self.integral = 0.001          #pid parameters ->i
+        self.derivative  = 0.002         #pid parameters ->d
