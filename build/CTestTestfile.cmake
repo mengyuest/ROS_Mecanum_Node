@@ -6,6 +6,6 @@
 # testing this directory and lists subdirectories to be tested as well.
 SUBDIRS(gtest)
 SUBDIRS(hokuyo_node)
-SUBDIRS(beginner_tutorials)
-SUBDIRS(middle)
-SUBDIRS(robot_setup_tf)
+SUBDIRS(tinker_driver)
+SUBDIRS(tinker_tf)
+SUBDIRS(tinker_2dnav)
