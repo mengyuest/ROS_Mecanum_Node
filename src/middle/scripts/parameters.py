@@ -30,7 +30,8 @@ class parameters:
         self.send_vel_rate = 6  #frequency about send vel to base
         self.send_odom_rate = 6 #frequency about send msg to odom topic
         
-        self.monitor_rate = 3
-        self.proportion = 0.2        #pid parameters ->p
-        self.integral = 0.000          #pid parameters ->i
-        self.derivative  = 0.000         #pid parameters ->d
+        self.monitor_rate = 3   #frequency about monitor the twist & odom
+        self.proportion = 0.2       #pid parameters ->p
+        self.integral = 0.00        #pid parameters ->i
+        self.derivative  = 0.00     #pid parameters ->d
+        self.decay = 0.4          #pid parameters -> decay rate for integral

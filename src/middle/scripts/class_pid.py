@@ -12,13 +12,14 @@ class class_pid():
 # set the new request of the velocity (should be used when a new command came) 
     def init(self, level):
         self.setPoint = level
-        self.outVel = level
         self.para = parameters.parameters()
 
 # calculate the velocity for calibration (should be used in certain freq)
     def cal(self, nextPoint):
         error = self.setPoint - nextPoint
         self.sumError += error
+#        print(self.para.decay)
+#        self.sumError *= self.para.decay
         self.dError = self.lastError - self.prevError
         self.prevError = self.lastError
         self.lastError = error
