@@ -1,0 +1,8 @@
+prefix=/home/meng/catkin_ws/devel
+
+Name: tinker_tf
+Description: Description of tinker_tf
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/meng/catkin_ws/devel/lib 
+Requires: 

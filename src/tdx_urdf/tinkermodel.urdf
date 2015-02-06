@@ -1,0 +1,338 @@
+<?xml version="1.0"?>
+<robot name="tinker">
+
+<!--***********************************************-->
+<!--*****************chasiss***********************-->
+<!--***********************************************-->
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size=".58 .4 .04"/>
+      </geometry>
+      <origin xyz="0 0 .13" />
+      <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size=".58 .4 .15"/>
+      </geometry>
+      <origin xyz="0 0 .075" />
+    </collision>
+  </link>
+
+<!--***********************************************-->
+<!--*****************wheel*************************-->
+<!--***********************************************-->
+
+  <link name="LF_wheel">
+    <visual>
+      <geometry>
+        <cylinder length=".04" radius=".075"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.57075 0 0"/>
+      <material name="black">
+        <color rgba="0 0 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length=".04" radius=".075"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.57075 0 0"/>
+    </collision>
+  </link>
+
+  <joint name="base_to_LF_wheel" type="continuous">
+    <parent link="base_link"/>
+    <child link="LF_wheel"/>
+    <axis xyz="0 1 0"/>
+    <origin xyz=".25 .245 .075" rpy="0 0 0"/>
+  </joint>
+
+  <link name="RF_wheel">
+    <visual>
+      <geometry>
+        <cylinder length=".04" radius=".075"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.57075 0 0"/>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length=".04" radius=".075"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.57075 0 0"/>
+    </collision>
+  </link>
+
+  <joint name="base_to_RF_wheel" type="continuous">
+    <parent link="base_link"/>
+    <child link="RF_wheel"/>
+    <axis xyz="0 1 0"/>
+    <origin xyz=".25 -0.245 .075" rpy="0 0 0"/>
+  </joint>
+
+  <link name="LR_wheel">
+    <visual>
+      <geometry>
+        <cylinder length=".04" radius=".075"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.57075 0 0"/>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length=".04" radius=".075"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.57075 0 0"/>
+    </collision>
+  </link>
+
+  <joint name="base_to_LR_wheel" type="continuous">
+    <parent link="base_link"/>
+    <child link="LR_wheel"/>
+    <axis xyz="0 1 0"/>
+    <origin xyz="-0.25 .245 .075" rpy="0 0 0"/>
+  </joint>
+
+  <link name="RR_wheel">
+    <visual>
+      <geometry>
+        <cylinder length=".04" radius=".075"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.57075 0 0"/>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length=".04" radius=".075"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.57075 0 0"/>
+    </collision>
+  </link>
+
+  <joint name="base_to_RR_wheel" type="continuous">
+    <parent link="base_link"/>
+    <child link="RR_wheel"/>
+    <axis xyz="0 1 0"/>
+    <origin xyz="-0.25 -0.245 .075" rpy="0 0 0"/>
+  </joint>
+
+<!--***********************************************-->
+<!--*****************couping***********************-->
+<!--***********************************************-->
+
+  <link name="LF_couping">
+    <visual>
+      <geometry>
+        <cylinder length=".1" radius=".015"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.57075 0 0"/>
+      <material name="white"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_LF_couping" type="fixed">
+    <parent link="base_link"/>
+    <child link="LF_couping"/>
+    <origin xyz="0.25 0.19 .075" rpy="0 0 0"/>
+  </joint>
+
+  <link name="RF_couping">
+    <visual>
+      <geometry>
+        <cylinder length=".1" radius=".015"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.57075 0 0"/>
+      <material name="white"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_RF_couping" type="fixed">
+    <parent link="base_link"/>
+    <child link="RF_couping"/>
+    <origin xyz="0.25 -0.19 .075" rpy="0 0 0"/>
+  </joint>
+
+  <link name="LR_couping">
+    <visual>
+      <geometry>
+        <cylinder length=".1" radius=".015"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.57075 0 0"/>
+      <material name="white"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_LR_couping" type="fixed">
+    <parent link="base_link"/>
+    <child link="LR_couping"/>
+    <origin xyz="-0.25 0.19 .075" rpy="0 0 0"/>
+  </joint>
+
+  <link name="RR_couping">
+    <visual>
+      <geometry>
+        <cylinder length=".1" radius=".015"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.57075 0 0"/>
+      <material name="white"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_RR_couping" type="fixed">
+    <parent link="base_link"/>
+    <child link="RR_couping"/>
+    <origin xyz="-0.25 -0.19 .075" rpy="0 0 0"/>
+  </joint>
+
+<!--***********************************************-->
+<!--*****************cpg_fixed*********************-->
+<!--***********************************************-->
+
+  <link name="LF_cpg_fixed">
+    <visual>
+      <geometry>
+        <box size=".14 .04 .05"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 1.57075"/>
+      <material name="black"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_LF_cpg_fixed" type="fixed">
+    <parent link="base_link"/>
+    <child link="LF_cpg_fixed"/>
+    <origin xyz=".25 0.13 .085" rpy="0 0 0"/>
+  </joint>
+
+  <link name="RF_cpg_fixed">
+    <visual>
+      <geometry>
+        <box size=".14 .04 .05"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 1.57075"/>
+      <material name="black"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_RF_cpg_fixed" type="fixed">
+    <parent link="base_link"/>
+    <child link="RF_cpg_fixed"/>
+    <origin xyz=".25 -0.13 .085" rpy="0 0 0"/>
+  </joint>
+
+  <link name="LR_cpg_fixed">
+    <visual>
+      <geometry>
+        <box size=".14 .04 .05"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 1.57075"/>
+      <material name="black"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_LR_cpg_fixed" type="fixed">
+    <parent link="base_link"/>
+    <child link="LR_cpg_fixed"/>
+    <origin xyz="-0.25 .13 .085" rpy="0 0 0"/>
+  </joint>
+
+  <link name="RR_cpg_fixed">
+    <visual>
+      <geometry>
+        <box size=".14 .04 .05"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 1.57075"/>
+      <material name="black"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_RR_cpg_fixed" type="fixed">
+    <parent link="base_link"/>
+    <child link="RR_cpg_fixed"/>
+    <origin xyz="-0.25 -0.13 .085" rpy="0 0 0"/>
+  </joint>
+
+<!--***********************************************-->
+<!--*****************Pillar************************-->
+<!--***********************************************-->
+
+  <link name="Pillar">
+    <visual>
+      <geometry>
+        <box size=".08 .08 1.5"/>
+      </geometry>
+      <origin xyz="0 0 0" />
+      <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size=".08 .08 1.5"/>
+      </geometry>
+      <origin xyz="0 0 0" />
+    </collision>
+  </link>
+
+  <joint name="base_to_Pillar" type="fixed">
+    <parent link="base_link"/>
+    <child link="Pillar"/>
+    <origin xyz="0 0 .87" rpy="0 0 0"/>
+  </joint>
+
+<!--***********************************************-->
+<!--*****************Laser*************************-->
+<!--***********************************************-->
+
+  <link name="Laser_fixed">
+    <visual>
+      <geometry>
+        <box size=".08 .095 0.105"/>
+      </geometry>
+      <origin xyz="0 0 0" />
+      <material name="blue">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size=".08 .095 0.105"/>
+      </geometry>
+      <origin xyz="0 0 0" />
+    </collision>
+  </link>
+
+  <joint name="base_to_Laser_fixed" type="fixed">
+    <parent link="base_link"/>
+    <child link="Laser_fixed"/>
+    <origin xyz="0.1 0 .2025" rpy="0 0 0"/>
+  </joint>
+
+  <link name="laser">
+    <visual>
+      <geometry>
+        <box size=".05 .05 0.085"/>
+      </geometry>
+      <origin xyz="0 0 -0.0225" />
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size=".05 .05 0.0425"/>
+      </geometry>
+      <origin xyz="0 0 -0.0225" />
+    </collision>
+  </link>
+
+  <joint name="base_to_laser" type="fixed">
+    <parent link="base_link"/>
+    <child link="laser"/>
+    <origin xyz="0.1 0 .32" rpy="0 0 0"/>
+  </joint>
+
+</robot>

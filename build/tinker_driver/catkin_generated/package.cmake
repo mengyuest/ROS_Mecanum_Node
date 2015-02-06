@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "tinker_driver")
+set(tinker_driver_MAINTAINER "meng <meng-y13@mails.tsinghua.edu.cn>")
+set(tinker_driver_DEPRECATED "")
+set(tinker_driver_VERSION "0.0.0")
+set(tinker_driver_BUILD_DEPENDS "roscpp" "rospy" "std_msgs" "tf" "message_generation")
+set(tinker_driver_RUN_DEPENDS "message_runtime" "roscpp" "rospy" "std_msgs" "tf")
+set(tinker_driver_BUILDTOOL_DEPENDS "catkin")

@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "tinker_2dnav")
+set(tinker_2dnav_MAINTAINER "meng <meng-y13@mails.tsinghua.edu.cn>")
+set(tinker_2dnav_DEPRECATED "")
+set(tinker_2dnav_VERSION "0.0.0")
+set(tinker_2dnav_BUILD_DEPENDS "hokuyo_node" "move_base" "tinker_driver" "tinker_tf")
+set(tinker_2dnav_RUN_DEPENDS "hokuyo_node" "move_base" "tinker_driver" "tinker_tf")
+set(tinker_2dnav_BUILDTOOL_DEPENDS "catkin")

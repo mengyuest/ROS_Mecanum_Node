@@ -1,0 +1,8 @@
+prefix=/home/meng/catkin_ws/devel
+
+Name: tinker_driver
+Description: Description of tinker_driver
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/meng/catkin_ws/devel/lib 
+Requires: message_runtime
