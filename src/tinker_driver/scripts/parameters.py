@@ -38,7 +38,7 @@ class parameters:
         self.threshold = 1.5
         self.wthreshold = 1.5
 
-        self.maxVBase = {'Vx': 350, 'Vy': 350, 'Vz': 350}        
+        self.maxVBase = {'Vx': 500, 'Vy': 500, 'Vz': 500}        
         
         self.maxV1 = {'Vx': 0.5, 'Vy': 0.3, 'Vz': 1.0}
         self.maxV2 = {'Vx': -0.1, 'Vy': -0.1, 'Vz': -0.1}

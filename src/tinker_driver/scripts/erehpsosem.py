@@ -29,7 +29,8 @@ def vToBase(vType, velocity):
 def updateVel(data):
 #update the Twist but not send Vel to base now
 #    try:
-        global_vel.linear.x = vToBase('Vx', data.linear.x)#data.twist.twist.linear.x)
+        print"catch velocity"
+	global_vel.linear.x = vToBase('Vx', data.linear.x)#data.twist.twist.linear.x)
         global_vel.linear.y = vToBase('Vy', data.linear.y)#data.twist.twist.linear.y)
         global_vel.angular.z = vToBase('Vz',data.angular.z)# data.twist.twist.angular.z) 
         print"ACCEPT VELOCITY~~ " + str(data.linear.x) + " " + str(data.linear.y) + " " + str(data.angular.z) + " " + str(global_vel.linear.x) + " " + str(global_vel.linear.y) + " " + str(global_vel.angular.z) + "\n\n " 
@@ -65,18 +66,21 @@ if __name__ == '__main__':
     last_time = rospy.Time.now()
 
     while not rospy.is_shutdown():
-        try:
+#        try:
 #BLOCK I : get encoder change from the base, then calculate and send to the Odom
 			
             current_time = rospy.Time.now()
             dt = 1.0 / para.send_vel_rate
             last_time = current_time
 # get speed and counts of four wheels and cal  x,y,z=0,th and Vx, Vy, Wz
-            n1 = int(client.send("GetEncoderChange 1"))
-            n2 = int(client.send("GetEncoderChange 2"))
-            n3 = int(client.send("GetEncoderChange 3"))
-            n4 = int(client.send("GetEncoderChange 4"))
-            
+ #           n1 = int(client.send("GetEncoderChange 1"))
+ #           n2 = int(client.send("GetEncoderChange 2"))
+ #           n3 = int(client.send("GetEncoderChange 3"))
+ #           n4 = int(client.send("GetEncoderChange 4"))
+            n1 = 0
+            n2 = 0
+            n3 = 0
+            n4 = 0            
             w1 = 2 * para.pi * n1 / dt * para.scale_from
             w2 = 2 * para.pi * n2 / dt * para.scale_from
             w3 = 2 * para.pi * n3 / dt * para.scale_from
@@ -127,9 +131,9 @@ if __name__ == '__main__':
 #                client.send("RobotSpeedSet Vy " + str(vToBase('Vy',global_vel.linear.y)))
 #                client.send("RobotSpeedSet Omega " + str(vToBase('Vz',global_vel.angular.z)))
                 rospy.loginfo("the base number is" + str(global_vel.linear.x))
-                client.send("RobotSpeedSet Vx " + str(global_vel.linear.x))
-                client.send("RobotSpeedSet Vy " + str(global_vel.linear.y))
-                client.send("RobotSpeedSet Omega " + str(global_vel.angular.z))
+                client.send("SetRobotSpeed Vx " + str(global_vel.linear.x))
+                client.send("SetRobotSpeed Vy " + str(global_vel.linear.y))
+                client.send("SetRobotSpeed Omega " + str(global_vel.angular.z))
                 client.send("EnableSystem")
 #                judge = False
 
@@ -139,9 +143,9 @@ if __name__ == '__main__':
 #                judge = True
 #            rospy.loginfo(rospy.get_caller_id() + "\n Set Vx:%f Vy:%f Wz:%f", global_vel.linear.x, global_vel.linear.y, global_vel.angular.z)
                 timer = (timer + 1)%6
-            if(timer == 1):
-                a = os.system('clear') 
+#            if(timer == 1):
+#                a = os.system('clear') 
             rate.sleep()
-        except:
-            print("socket timeout check if the wifi is live and the UDP link is ok")
+#        except:
+#            print("socket timeout check if the wifi is live and the UDP link is ok")
             continue
