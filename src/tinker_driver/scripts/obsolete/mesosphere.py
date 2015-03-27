@@ -2,6 +2,7 @@
 # license removed for brevity
 import rospy
 import client
+import class_pid
 import parameters
 import tf
 import time
@@ -13,46 +14,47 @@ from std_msgs.msg import String
 
 global_vel = Twist()
 para = parameters.parameters()
+pid_x = class_pid.class_pid()
+pid_y = class_pid.class_pid()
+pid_z = class_pid.class_pid()
 
 timer = 0
 
-def vToBase(vType, velocity):
-    baseVelocity = 0
-    if(velocity >= 0):
-        if(velocity < para.maxV1[vType] and velocity > para.minV1[vType]):
-            baseVelocity = velocity * para.a1[vType] + para.b1[vType]
-    else:
-        if(velocity < para.maxV2[vType] and velocity > para.minV2[vType]):
-            baseVelocity = velocity * para.a2[vType] + para.b2[vType]
-    return baseVelocity
+def setLevel(data):
+#update the Twist but not pub now (with a rate defined in main())  
+#    try:
+#        print"ACCEPT VELOCITY~~~~~~~~~~~~~~~~~~~~~~ \n \n"
+    pid_x.init(data.linear.x * para.times)
+    pid_y.init(data.linear.y * para.times)
+    pid_z.init(data.angular.z * para.times)
+#    except:
+#        print("error happens in speed level setting, @PID @Twist")
+#        hehe =1
+def fixSpeed(data):
 
-def updateVel(data):
-#update the Twist but not send Vel to base now
     try:
-        global_vel.linear.x = vToBase('Vx', data.twist.twist.linear.x)
-        global_vel.linear.y = vToBase('Vy', data.twist.twist.linear.y)
-        global_vel.angular.z = vToBase('Vz', data.twist.twist.angular.z) 
-        print"ACCEPT VELOCITY~~~~~~~~~~~~~~~~~~~~~~ \n \n"
-   
+#        print"RECEIVE ODOM~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \n \n "
+        global_vel.linear.x = pid_x.cal(data.twist.twist.linear.x)
+        global_vel.linear.y = pid_y.cal(data.twist.twist.linear.y)
+        global_vel.angular.z = pid_z.cal(data.twist.twist.angular.z)	
+        	
+#        global_vel.linear.x = (global_vel.linear.x if(global_vel.linear.x < para.threshold)  else para.threshold)
+#        global_vel.linear.y = (global_vel.linear.y if(global_vel.linear.y < para.threshold)  else para.threshold)
+#        global_vel.angular.z = (global_vel.angular.z if(global_vel.angular.z < para.wthreshold) else para.wthreshold)
+        print(global_vel.linear.x)
     except:
-        print"error in updateVel(data) : can't cal Vel properly"
-        
-def isVelocityValid():
-    if global_vel.linear.x < para.maxVBase['Vx'] and global_vel.linear.x > -1 * para.maxVBase['Vx']:
-        if  global_vel.linear.y < para.maxVBase['Vy'] and global_vel.linear.y > -1 * para.maxVBase['Vy']:
-            if  global_vel.angular.z < para.maxVBase['Vz'] and global_vel.angular.z > -1 * para.maxVBase['Vz']:
-                return True
-    return False
-
+#        print "error happens in speed calibration , @PID @Odometry"
+        hehe =2
 if __name__ == '__main__': 
 
 #INITIALIZATION: create the ROS node, set frquency, add trigger functions 
-    rospy.init_node('erehpsosem',anonymous=True)
+    rospy.init_node('mesosphere',anonymous=True)
 
     pub = rospy.Publisher('odom',Odometry,queue_size=100)
     odom_broadcaster = tf.TransformBroadcaster()   
 
-    rospy.Subscriber("cmd_vel", Twist, updateVel)
+    rospy.Subscriber("cmd_vel", Twist, setLevel)
+    rospy.Subscriber("odom", Odometry, fixSpeed)
 
     rate = rospy.Rate(para.send_vel_rate)
 	
@@ -121,23 +123,17 @@ if __name__ == '__main__':
 
   
 #BLOCK II: send velocity to the base with PID calibration
-            if isVelocityValid()==True:
-                
-#                client.send("RobotSpeedSet Vx " + str(vToBase('Vx',global_vel.linear.x)))
-#                client.send("RobotSpeedSet Vy " + str(vToBase('Vy',global_vel.linear.y)))
-#                client.send("RobotSpeedSet Omega " + str(vToBase('Vz',global_vel.angular.z)))
-                client.send("RobotSpeedSet Vx " + str(global_vel.linear.x))
-                client.send("RobotSpeedSet Vy " + str(global_vel.linear.y))
-                client.send("RobotSpeedSet Omega " + str(global_vel.angular.z))
+            if judge == True:
                 client.send("EnableSystem")
-#                judge = False
 
-
+                client.send("SetRobotSpeed Vx " + str(global_vel.linear.x * para.scale_to))
+                client.send("SetRobotSpeed Vy " + str(global_vel.linear.y * para.scale_to))
+                client.send("SetRobotSpeed Omega " + str(global_vel.angular.z * para.scale_to))
+                judge = False
             else:
-
-#                judge = True
+                judge = True
 #            rospy.loginfo(rospy.get_caller_id() + "\n Set Vx:%f Vy:%f Wz:%f", global_vel.linear.x, global_vel.linear.y, global_vel.angular.z)
-                timer = (timer + 1)%6
+            timer = (timer + 1)%6
             if(timer == 1):
                 a = os.system('clear') 
             rate.sleep()
