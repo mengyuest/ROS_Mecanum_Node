@@ -45,8 +45,8 @@ class parameters:
         self.minV1 = {'Vx': 0.1, 'Vy': 0.1, 'Vz': 0.1}
         self.minV2 = {'Vx': -0.5, 'Vy': -0.3, 'Vz': -1.0}
         
-        self.a1 = {'Vx': 0.5, 'Vy': 0.5, 'Vz': 0.5}
-        self.a2 = {'Vx': 0.5, 'Vy': 0.5, 'Vz': 0.5}
-        self.b1 = {'Vx': 0.5, 'Vy': 0.5, 'Vz': 0.5}
-        self.b2 = {'Vx': 0.5, 'Vy': 0.5, 'Vz': 0.5}
+        self.a1 = {'Vx': 1144, 'Vy': 1215, 'Vz': 664}
+        self.a2 = {'Vx': 1144, 'Vy': 1215, 'Vz': 664}
+        self.b1 = {'Vx': 14, 'Vy': 9, 'Vz': -17}
+        self.b2 = {'Vx': 14, 'Vy': 9, 'Vz': -17}
 

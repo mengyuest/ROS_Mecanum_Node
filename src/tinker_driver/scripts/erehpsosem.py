@@ -28,14 +28,14 @@ def vToBase(vType, velocity):
 
 def updateVel(data):
 #update the Twist but not send Vel to base now
-    try:
-        global_vel.linear.x = vToBase('Vx', data.twist.twist.linear.x)
-        global_vel.linear.y = vToBase('Vy', data.twist.twist.linear.y)
-        global_vel.angular.z = vToBase('Vz', data.twist.twist.angular.z) 
-        print"ACCEPT VELOCITY~~~~~~~~~~~~~~~~~~~~~~ \n \n"
+#    try:
+        global_vel.linear.x = vToBase('Vx', data.linear.x)#data.twist.twist.linear.x)
+        global_vel.linear.y = vToBase('Vy', data.linear.y)#data.twist.twist.linear.y)
+        global_vel.angular.z = vToBase('Vz',data.angular.z)# data.twist.twist.angular.z) 
+        print"ACCEPT VELOCITY~~ " + str(data.linear.x) + " " + str(data.linear.y) + " " + str(data.angular.z) + " " + str(global_vel.linear.x) + " " + str(global_vel.linear.y) + " " + str(global_vel.angular.z) + "\n\n " 
    
-    except:
-        print"error in updateVel(data) : can't cal Vel properly"
+#    except:
+#        print"error in updateVel(data) : can't cal Vel properly"
         
 def isVelocityValid():
     if global_vel.linear.x < para.maxVBase['Vx'] and global_vel.linear.x > -1 * para.maxVBase['Vx']:
@@ -126,6 +126,7 @@ if __name__ == '__main__':
 #                client.send("RobotSpeedSet Vx " + str(vToBase('Vx',global_vel.linear.x)))
 #                client.send("RobotSpeedSet Vy " + str(vToBase('Vy',global_vel.linear.y)))
 #                client.send("RobotSpeedSet Omega " + str(vToBase('Vz',global_vel.angular.z)))
+                rospy.loginfo("the base number is" + str(global_vel.linear.x))
                 client.send("RobotSpeedSet Vx " + str(global_vel.linear.x))
                 client.send("RobotSpeedSet Vy " + str(global_vel.linear.y))
                 client.send("RobotSpeedSet Omega " + str(global_vel.angular.z))
